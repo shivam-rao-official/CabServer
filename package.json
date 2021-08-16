@@ -1,0 +1,26 @@
+{
+  "name": "cabserver",
+  "version": "1.0.0",
+  "description": "Cab Server for managing in house cab booking",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shivam-rao-official/CabServer.git"
+  },
+  "author": "Shivam Rao",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shivam-rao-official/CabServer/issues"
+  },
+  "homepage": "https://github.com/shivam-rao-official/CabServer#readme",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "gitignore": "^0.7.0",
+    "mongoose": "^5.13.7",
+    "nodemon": "^2.0.12"
+  }
+}
