@@ -36,7 +36,7 @@ router.get('/viewAllTrips', async (req, res) => {
  * 
  */
 
- router.get('/viewTrips', async (req, res) => {
+ router.post('/viewTrips', async (req, res) => {
      const empId = req.body.empId;
 
     await TripTable.find({empId},(err, data) => {
