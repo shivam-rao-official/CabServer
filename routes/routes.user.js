@@ -70,4 +70,35 @@ router.post('/signUp', async (req, res) => {
 })
 
 
+/**
+ *      
+ * 
+ *      Login
+ */
+
+router.post('/login', async(req, res) => {
+    const empId = req.body.empId;
+    const passwd = req.body.passwd;
+
+
+    const empIdExists = await UserTable.findOne({empId});
+   
+    if(empIdExists) {
+        if(empIdExists.passwd != passwd){
+            return res.json({
+                status: false,
+                msg: `Incorrect Password`
+            })
+        }
+        return res.json({
+            status: true,
+            msg: `Logged In Successfully`
+        })
+    }else {
+        return res.json({
+            status: false,
+            msg: `No User Found with that Employee ID`
+        })
+    }
+})
 module.exports = router
