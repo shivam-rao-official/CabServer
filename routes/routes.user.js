@@ -92,7 +92,9 @@ router.post('/login', async(req, res) => {
         }
         return res.json({
             status: true,
-            msg: `Logged In Successfully`
+            msg: `Logged In Successfully`,
+            data: empIdExists
+        
         })
     }else {
         return res.json({
