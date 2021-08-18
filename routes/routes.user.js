@@ -39,6 +39,7 @@ router.post('/signUp', async (req, res) => {
     const name = req.body.name
     const phoneNum = req.body.phoneNum
     const passwd = req.body.passwd
+    const role = req.body.role
 
     const checkEmpId = await UserTable.findOne({empId})
     if(checkEmpId) {
@@ -52,7 +53,8 @@ router.post('/signUp', async (req, res) => {
         empId,
         name,
         phoneNum,
-        passwd
+        passwd,
+        role
     })
 
     await UserInstance.save((err) => {
@@ -64,7 +66,8 @@ router.post('/signUp', async (req, res) => {
         }
         return res.json({
             status: true,
-            msg: `User Created Successfully`
+            msg: `User Created Successfully`,
+            data: UserInstance
         })
     })
 })
