@@ -70,7 +70,8 @@ router.post('/createTrip', async(req, res) => {
     const empId = req.body.empId;
     const origin = req.body.origin;
     const destination = req.body.destination;
-    const vehicleType = req.body.vehicleType
+    const vehicleType = req.body.vehicleType;
+    const confirmed = false;
 
     const TripSchema = new TripTable({
         empId,
@@ -79,7 +80,8 @@ router.post('/createTrip', async(req, res) => {
         vehicleType,
         vehicleNum: "null",
         driverNum: "null",
-        confirmedBy: "null"
+        confirmedBy: "null",
+        confirmed
     })
 
     await TripSchema.save((err) => {

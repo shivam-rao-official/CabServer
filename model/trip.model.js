@@ -29,6 +29,10 @@ const TripSchema = new mongoose.Schema({
     confirmedbBy: {
         type: String,
         required: true,
+    },
+    confirmed: {
+        type: Boolean,
+        required: true,
     }
 },{
     timestamps: true,
