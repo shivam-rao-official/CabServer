@@ -78,7 +78,8 @@ router.post('/createTrip', async(req, res) => {
         destination,
         vehicleType,
         vehicleNum: "null",
-        driverNum: "null"
+        driverNum: "null",
+        confirmedBy: "null"
     })
 
     await TripSchema.save((err) => {
