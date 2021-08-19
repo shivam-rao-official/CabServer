@@ -71,7 +71,7 @@ router.get('/viewAllTrips', async (req, res) => {
 router.post('/tripDetail/:uid', (req, res) => {
     const uid = req.params.uid;
 
-    await TripTable.findById({uid},(err, data) => {
+    TripTable.findById({uid},(err, data) => {
         if(err) {
             return res.json({
                 status: false,
