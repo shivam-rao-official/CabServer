@@ -1,5 +1,6 @@
 const express = require('express')
 const TripTable = require('../model/trip.model')
+const UserTable = require('../routes/routes.user')
 
 const router = express.Router()
 
@@ -73,6 +74,7 @@ router.post('/createTrip', async(req, res) => {
     const vehicleType = req.body.vehicleType;
     const confirmed = false;
 
+    const checkEmpId = await UserTable.findOne()
     const TripSchema = new TripTable({
         empId,
         origin,
@@ -84,6 +86,7 @@ router.post('/createTrip', async(req, res) => {
         confirmed
     })
 
+    
     await TripSchema.save((err) => {
         if(err){
             return res.json({
