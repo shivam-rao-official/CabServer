@@ -26,8 +26,9 @@ const TripSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    confirmedbBy: {
-        type: String
+    confirmedBy: {
+        type: String,
+        required: true
     },
     confirmed: {
         type: Boolean,
