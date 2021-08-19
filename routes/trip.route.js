@@ -64,6 +64,28 @@ router.get('/viewAllTrips', async (req, res) => {
 
 /**
  * 
+ *      VIEW Trip Summary for the USER
+ * 
+ */
+
+router.post('/tripDetail/:uid', (req, res) => {
+    const uid = req.params.uid;
+
+    await TripTable.findById({uid},(err, data) => {
+        if(err) {
+            return res.json({
+                status: false,
+                msg: err.message
+            })
+        }
+        return res.json({
+            status: true,
+            msg: data
+        })
+    })
+})
+/**
+ * 
  *      Create Trip
  * 
  */
