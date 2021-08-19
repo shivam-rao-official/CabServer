@@ -74,7 +74,7 @@ router.post('/createTrip', async(req, res) => {
     const vehicleType = req.body.vehicleType;
     const confirmed = false;
 
-    const checkEmpId = await UserTable.findOne()
+    
     const TripSchema = new TripTable({
         empId,
         origin,
