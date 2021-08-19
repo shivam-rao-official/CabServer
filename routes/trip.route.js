@@ -50,7 +50,7 @@ router.get('/viewAllTrips', async (req, res) => {
         if(data.length == 0) {
             return res.json({
                 status: true,
-                msg: `No data in the DB or The EmpID is wrong`
+                msg: []
             })
         }
         // if(data.empId == empId){
