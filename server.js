@@ -1,5 +1,6 @@
 const express = require('express')
 const mongoose = require('mongoose')
+const cors = require('cors')
 require('dotenv/config')
 const UserRoute = require('./routes/routes.user')
 const TripRoute = require('./routes/trip.route')
@@ -23,5 +24,6 @@ app.listen(port, () => {
 
 app
     .use(express.json())
+    .use(cors())
     .use('/user',UserRoute)
     .use('/trip', TripRoute)
