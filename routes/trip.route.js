@@ -49,7 +49,7 @@ router.get('/viewAllTrips', async (req, res) => {
         }
         if(data.length == 0) {
             return res.json({
-                status: true,
+                status: false,
                 msg: []
             })
         }
