@@ -50,7 +50,7 @@ router.get('/viewAllTrips', async (req, res) => {
         if(data.length == 0) {
             return res.json({
                 status: false,
-                msg: []
+                msg: [{msg: "No Data found"}]
             })
         }
         // if(data.empId == empId){
