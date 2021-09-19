@@ -31,6 +31,36 @@ router.get('/viewAllTrips', async (req, res) => {
 })
 
 /**
+ * 
+ *      View Filtered Trips
+ * 
+ */
+router.get('/viewFilteredTrips/:vehicleType', async (req, res) => {
+
+    const isConfirmed = req.params.isConfirmed;
+    const vehicleType = req.params.vehicleType;
+
+    await TripTable.findById(isConfirmed, (err, data) => {
+        if(err) {
+            return res.json({
+                status: false,
+                msg: err.message
+            })
+        }
+        if(data.length == 0) {
+            return res.json({
+                status: true,
+                msg: `No data in the DB`
+            })
+        }
+        return res.json({
+            status: true,
+            msg: data
+        })
+    })
+})
+
+/**
  *  
  * 
  *  View Trps User Wise
@@ -150,4 +180,6 @@ router.put('/confirmTrip/:uid', async (req, res) => {
     })
 
 })
+
+
 module.exports = router
