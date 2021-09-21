@@ -33,9 +33,9 @@ const TripSchema = new mongoose.Schema({
     confirmed: {
         type: Boolean,
         required: true,
-    }
+    },
 },{
-    timestamps: true,
+    timestamps: new Date('<YYYY-mm-dd>'),
 })
 
 

@@ -10,7 +10,7 @@ const router = express.Router()
  * 
  */
 router.get('/viewAllTrips', async (req, res) => {
-    await TripTable.find((err, data) => {
+    var data = await TripTable.find((err, data) => {
         if(err) {
             return res.json({
                 status: false,
@@ -23,11 +23,18 @@ router.get('/viewAllTrips', async (req, res) => {
                 msg: `No data in the DB`
             })
         }
+        // return res.json({
+        //     status: true,
+        //     msg: data
+        // })
+    }).sort({
+        updatedAt: -1
+    })
+
         return res.json({
             status: true,
             msg: data
         })
-    })
 })
 
 /**
@@ -35,12 +42,18 @@ router.get('/viewAllTrips', async (req, res) => {
  *      View Filtered Trips
  * 
  */
-router.get('/viewFilteredTrips/:vehicleType', async (req, res) => {
+router.get('/viewFilteredTrips', async (req, res) => {
 
-    const isConfirmed = req.params.isConfirmed;
-    const vehicleType = req.params.vehicleType;
+    const isConfirmed = req.body.isConfirmed;
+    const vehicleType = req.body.vehicleType;
+    const fromDate = req.body.fromDate;
+    const toDate = req.body.toDate;
 
-    await TripTable.findById(isConfirmed, (err, data) => {
+    await TripTable.find({
+        vehicleType, 
+        confirmed:isConfirmed,
+        createdAt: fromDate
+    },(err, data) => {
         if(err) {
             return res.json({
                 status: false,
@@ -58,6 +71,11 @@ router.get('/viewFilteredTrips/:vehicleType', async (req, res) => {
             msg: data
         })
     })
+
+    // return res.json({
+    //     msg: data
+    // })
+
 })
 
 /**
@@ -132,9 +150,9 @@ router.post('/createTrip', async(req, res) => {
         origin,
         destination,
         vehicleType,
-        vehicleNum: "null",
-        driverNum: "null",
-        confirmedBy: "null",
+        vehicleNum: "Not Confirmed",
+        driverNum: "Not Confirmed",
+        confirmedBy: "false",
         confirmed
     })
 
