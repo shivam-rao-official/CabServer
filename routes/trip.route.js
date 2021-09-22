@@ -40,7 +40,7 @@ router.get('/viewAllTrips', async (req, res) => {
  *      Filters made for: vehicle type and confirm status.
  * 
  */
-router.get('/viewFilteredTrips', async (req, res) => {
+router.post('/viewFilteredTrips', async (req, res) => {
 
     const isConfirmed = req.body.isConfirmed;
     const vehicleType = req.body.vehicleType;
