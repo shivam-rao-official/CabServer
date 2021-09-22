@@ -40,17 +40,16 @@ router.get('/viewAllTrips', async (req, res) => {
  *      Filters made for: vehicle type and confirm status.
  * 
  */
-router.get('/viewFilteredTrips', async (req, res) => {
+router.post('/viewFilteredTrips', async (req, res) => {
 
     const isConfirmed = req.body.isConfirmed;
     const vehicleType = req.body.vehicleType;
     const fromDate = req.body.fromDate;
-    const toDate = req.body.toDate;
+   
 
     await TripTable.find({
         vehicleType, 
-        confirmed:isConfirmed,
-        createdAt: fromDate
+        confirmed:isConfirmed
     },(err, data) => {
         if(err) {
             return res.json({
