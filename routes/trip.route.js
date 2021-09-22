@@ -81,7 +81,7 @@ router.get('/viewFilteredTrips', async (req, res) => {
  router.post('/viewTrips', async (req, res) => {
      const empId = req.body.empId;
 
-    await TripTable.find({empId},(err, data) => {
+    var data = await TripTable.find({empId},(err, data) => {
         if(err) {
             return res.json({
                 status: false,
