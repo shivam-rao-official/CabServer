@@ -7,6 +7,7 @@ const router = express.Router()
 /**
  * 
  *      View ALl Trips
+ *      response now returned sorted data.
  * 
  */
 router.get('/viewAllTrips', async (req, res) => {
@@ -23,10 +24,6 @@ router.get('/viewAllTrips', async (req, res) => {
                 msg: `No data in the DB`
             })
         }
-        // return res.json({
-        //     status: true,
-        //     msg: data
-        // })
     }).sort({
         updatedAt: -1
     })
@@ -40,6 +37,7 @@ router.get('/viewAllTrips', async (req, res) => {
 /**
  * 
  *      View Filtered Trips
+ *      Filters made for: vehicle type and confirm status.
  * 
  */
 router.get('/viewFilteredTrips', async (req, res) => {
@@ -72,10 +70,6 @@ router.get('/viewFilteredTrips', async (req, res) => {
         })
     })
 
-    // return res.json({
-    //     msg: data
-    // })
-
 })
 
 /**
@@ -84,7 +78,6 @@ router.get('/viewFilteredTrips', async (req, res) => {
  *  View Trps User Wise
  * 
  */
-
  router.post('/viewTrips', async (req, res) => {
      const empId = req.body.empId;
 
@@ -101,12 +94,13 @@ router.get('/viewFilteredTrips', async (req, res) => {
                 msg: [{msg: "No Data found"}]
             })
         }
-        // if(data.empId == empId){
-            return res.json({
-                status: true,
-                msg: data
-            })
-        // }
+    }).sort({
+        'createdAt': -1
+    })
+
+    return res.json({
+        status: true,
+        msg: data
     })
 })
 
@@ -132,6 +126,7 @@ router.post('/tripDetail/:uid', (req, res) => {
         })
     })
 })
+
 /**
  * 
  *      Create Trip
@@ -199,5 +194,36 @@ router.put('/confirmTrip/:uid', async (req, res) => {
 
 })
 
+
+/**
+ * 
+ *      View recent trip.
+ * 
+ */
+router.get('/recentTrip', async (req, res) => {
+    const empId = req.body.empId;
+
+    var data = await TripTable.find({empId, confirmed: true},(err, data) => {
+        if(err) {
+            return res.json({
+                status: false,
+                msg: err.message
+            })
+        }
+        if(data.length == 0) {
+            return res.json({
+                status: false,
+                msg: [{msg: "No Data found"}]
+            })
+        }
+    }).sort({
+        updatedAt: -1
+    }).limit(1)
+
+    return res.json({
+        status: true,
+        msg: data
+    })
+})
 
 module.exports = router
